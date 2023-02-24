@@ -3,8 +3,6 @@ package br.com.erudio.services;
 import java.util.List;
 import java.util.logging.Logger;
 
-import br.com.erudio.data.vo.v2.PersonVOV2;
-import br.com.erudio.mapper.custom.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +19,6 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
-
-    @Autowired
-    PersonMapper mapper;
 
     public List<PersonVO> findAll() {
 
@@ -48,14 +43,6 @@ public class PersonServices {
         var vo =  DozerMapper.parseObject(repository.save(entity), PersonVO.class);
         return vo;
     }
-    public PersonVOV2 createV2(PersonVOV2 person) {
-
-        logger.info("Creating one person with v2!");
-        var entity = mapper.convertVOToEntity(person);
-        var vo =  mapper.convertEntityToVO(repository.save(entity));
-        return vo;
-    }
-
     public PersonVO update(PersonVO person) {
 
         logger.info("Updating one person!");
